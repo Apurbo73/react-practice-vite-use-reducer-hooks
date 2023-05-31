@@ -1,13 +1,16 @@
 import React, { useState } from "react";
+import Modal from "./Modal";
 
 const NewData = () => {
   const booksData = [
-    { id: 1, name: "Apurbo " },
-    { id: 2, name: "Bangladesh" },
-    { id: 3, name: "Leading University" }
+    { id: 1, name: "Pather Pachali " },
+    { id: 2, name: "Bela Sheshe" },
+    { id: 3, name: "BongoBondhu" }
   ];
   const [books, setBooks] = useState(booksData);
   const [bookName, setBookName] = useState("");
+  const [modalText, setModalText] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
   //handle Submit:
   const handleSubmit = e => {
     e.preventDefault();
@@ -15,6 +18,8 @@ const NewData = () => {
     setBooks(previousData => {
       return [...previousData, newBook];
     });
+    setIsModalOpen(true);
+    setModalText(`Book ${bookName} is added`);
     setBookName("");
   };
   return (
@@ -23,15 +28,15 @@ const NewData = () => {
       {books.map(book => {
         const { id, name } = book;
         return (
-          <h3 key={id}>
+          <p key={id}>
             {name}
-          </h3>
+          </p>
         );
       })}
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="enter more info about you"
+          placeholder="enter new book name"
           value={bookName}
           onChange={e => {
             setBookName(e.target.value);
@@ -39,6 +44,7 @@ const NewData = () => {
         />
         <button type="submit">Submit</button>
       </form>
+      {isModalOpen && <Modal modalText={modalText} />}
     </div>
   );
 };

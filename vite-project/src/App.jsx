@@ -1,11 +1,12 @@
-import useReducers from "./component/useReducers";
+
+import './App.css'
+import NewData from './component/NewData'
 
 function App() {
+
   return (
-    <div>
-      <useReducers />
-    </div>
-  );
+   <NewData></NewData>
+  )
 }
 
-export default App;
+export default App
